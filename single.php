@@ -1,22 +1,31 @@
+<?php
+    $alpha_layout_class = "col-md-8";
+    $alpha_text_class = "";
+    if(!is_active_sidebar("sidebar-1")){
+        $alpha_layout_class = "col-md-10 offset-md-1";
+        $alpha_text_class = "text-center";
+    }
+?>
+
 <?php get_header(); ?>
-<body <?php body_class(); ?>>
+<body <?php body_class(array("first_class", "second_class", "third_class")); ?>>
 <?php get_template_part( "hero" ); ?>
     <div class="container">
         <div class="row">
-            <div class="col-md-8">
+            <div class="<?php echo $alpha_layout_class; ?>">
                 <div class="posts">
                     <?php
                     while ( have_posts() ) :
                         the_post();
                         ?>
-                        <div class="post" <?php post_class(); ?>>
+                        <div class="post" <?php post_class(array("first_post_class", "second_post_class", "third_post_class")); ?>>
                             <div class="container">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <h2 class="post-title">
+                                        <h2 class="post-title <?php echo $alpha_text_class; ?> ">
                                             <?php the_title(); ?>
                                         </h2>
-                                        <p class="">
+                                        <p class="<?php echo $alpha_text_class; ?>">
                                             <em><?php the_author(); ?></em><br/>
                                             <?php echo get_the_date(); ?>
                                         </p>
@@ -35,6 +44,8 @@
 
                                             the_content();
 
+                                            wp_link_pages();
+
                                             next_post_link();
                                             echo "<br/>";
                                             previous_post_link();
@@ -42,13 +53,38 @@
                                             ?>
                                         </p>
                                     </div>
-                                    <?php if ( comments_open() ): ?>
-                                        <div class="col-md-10 offset-md-1">
-                                            <?php
-                                            comments_template();
-                                            ?>
+
+                                    <div class="author-section">
+                                        <div class="row">
+                                            <div class="col-md-2 author-image">
+                                                <?php
+                                                    echo get_avatar(get_the_author_meta("id"));
+                                                ?>
+                                            </div>      
+                                            <div class="col-md-10">
+                                                <h4>
+                                                    <?php echo get_the_author_meta("display_name"); ?>
+                                                    <p><?php echo get_the_author_meta('description'); ?></p>
+                                                </h4>
+                                            </div>      
                                         </div>
-                                    <?php endif; ?>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="row">
+                                            <div class="row">
+                                                <div class="row">
+                                                    <?php if ( comments_open() ): ?>
+                                                        <div class="col-md-10 offset-md-1">
+                                                            <?php
+                                                            comments_template();
+                                                            ?>
+                                                        </div>
+                                                    <?php endif; ?>
+                                                </div>
+                                            </div>  
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -72,6 +108,11 @@
                     </div>
                 </div>
             </div>
+
+            <?php
+                if(is_active_sidebar("sidebar-1")) :
+            ?>
+
             <div class="col-md-4">
                 <?php
                 if ( is_active_sidebar( "sidebar-1" ) ) {
@@ -79,7 +120,10 @@
                 }
                 ?>
             </div>
+
+        <?php endif; ?>
         </div>
+
     </div>
 
 <?php get_footer(); ?>

@@ -84,3 +84,41 @@ h2.post-title {
     color: #222;
     text-decoration: none;
 }
+
+.navigation{
+    margin-bottom: 80px
+}
+
+.post-title a{
+    color: #222;
+}
+
+.dashicons{
+    color: #ccc;
+    font-size: 100px;
+}
+
+.author-section{
+    border: 1px solid #ccc;
+    padding: 25px;
+}
+
+.author-image img{
+    border-radius: 48px;
+}
+
+#reply-title{
+    margin-top: 30px
+}
+
+#comments{
+    margin-top: 30px
+}
+
+.header-logo{
+    margin-top: 50px !important;
+}
+
+.header-logo img{
+    border-radius: 50px;
+}
