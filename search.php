@@ -3,9 +3,17 @@
 <?php get_template_part("hero"); ?>
 <div class="posts">
     <?php
+    if( ! have_posts() ){
+        ?>
+            <h2 class="text-center">
+                <?php _e("No Result Found"); ?>
+            </h2>
+        <?php
+    }
+
     while ( have_posts() ) {
         the_post();
-        get_template_part("post-formats/content",get_post_format());
+        get_template_part("post-formats/content", get_post_format());
         }
     ?>
 
@@ -25,5 +33,3 @@
     </div>
 </div>
 <?php get_footer(); ?>
-
-<!-- Last Episode Watch ৯ই জুন, ২০১৮ Seen Done -->

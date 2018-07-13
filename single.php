@@ -25,21 +25,40 @@
                                         <h2 class="post-title <?php echo $alpha_text_class; ?> ">
                                             <?php the_title(); ?>
                                         </h2>
+
                                         <p class="<?php echo $alpha_text_class; ?>">
-                                            <em><?php the_author(); ?></em><br/>
+                                            <em><?php the_author_posts_link(); ?></em><br/>
                                             <?php echo get_the_date(); ?>
                                         </p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <p>
+                                        <div class="slider">
                                             <?php
-                                            if ( has_post_thumbnail() ) {
-                                                $thumbnail_url = get_the_post_thumbnail_url(null,"large");
-                                                printf( '<a class="popup" href="%s" data-featherlight="image">',$thumbnail_url);
-                                                the_post_thumbnail( "large", array( "class" => "img-fluid" ) );
-                                                echo '</a>';
+                                            if ( class_exists( 'Attachments' ) ) {
+                                                $attachments = new Attachments( 'slider' );
+                                                if ( $attachments->exist() ) {
+                                                    while ( $attachment = $attachments->get() ) { ?>
+                                                        <div>
+                                                            <?php echo $attachments->image( 'large' ); ?>
+                                                        </div>
+                                                        <?php
+                                                    }
+                                                }
+                                            }
+                                            ?>
+                                        </div>
+
+                                        <div>
+                                            <?php
+                                            if ( !class_exists( 'Attachments' ) ) {
+                                                if ( has_post_thumbnail() ) {
+                                                    $thumbnail_url = get_the_post_thumbnail_url(null,"large");
+                                                    printf( '<a class="popup" href="%s" data-featherlight="image">',$thumbnail_url);
+                                                    the_post_thumbnail( "large", array( "class" => "img-fluid" ) );
+                                                    echo '</a>';
+                                                }
                                             }
 
                                             the_content();
@@ -51,7 +70,7 @@
                                             previous_post_link();
 
                                             ?>
-                                        </p>
+                                        </div>
                                     </div>
 
                                     <div class="author-section">

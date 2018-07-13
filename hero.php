@@ -18,6 +18,10 @@
                 <h1 class="align-self-center display-1 text-center heading">
                     <a href="<?php echo site_url(); ?>"><?php bloginfo( "name" ); ?></a>
                 </h1>
+
+                <p class="text-center">
+                    <?php todays_date(); ?>
+                </p>
             </div>
             <div class="col-md-12">
                 <div class="navigation">
@@ -32,6 +36,23 @@
                     ?>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 text-center search-form">
+            <?php
+            if(is_search()){
+                ?>
+            <h3><?php _e("You searched for","alpha") ?>: <?php the_search_query(); ?></h3>
+            <?php
+            }
+            ?>
+            <?php
+            echo get_search_form();
+            ?>
         </div>
     </div>
 </div>

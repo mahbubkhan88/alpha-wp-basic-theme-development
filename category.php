@@ -1,11 +1,20 @@
 <?php get_header(); ?>
 <body <?php body_class(); ?>>
 <?php get_template_part("hero"); ?>
-<div class="posts">
+<div class="posts text-center">
+
+    <h1> Related Category: 
+        <?php single_cat_title(); ?>
+    </h1>
+
     <?php
     while ( have_posts() ) {
         the_post();
-        get_template_part("post-formats/content",get_post_format());
+
+        ?>
+            <a href="<?php the_permalink(); ?>"><h2><?php the_title(); ?></h2></a>
+        <?php
+
         }
     ?>
 
@@ -25,5 +34,3 @@
     </div>
 </div>
 <?php get_footer(); ?>
-
-<!-- Last Episode Watch ৯ই জুন, ২০১৮ Seen Done -->
